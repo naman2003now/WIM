@@ -30,8 +30,9 @@ let config = {
       preventDefault: true,
     },
     keybindings: {
+      "C-[": switchToNormalMode,
       "C- ": openExtendedSearch,
-      l: switchToInsertMode,
+      i: switchToInsertMode,
       j: replyModeDown,
       k: replyModeUp,
     },
@@ -63,27 +64,6 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     keybindings[currentBinding]();
   }
-
-  // if (e.key == "p" && e.ctrlKey) {
-  //   e.preventDefault();
-  //   let event = new KeyboardEvent("keydown", {
-  //     isTruested: true,
-  //     key: "k",
-  //     altKey: true,
-  //   });
-  //   document.dispatchEvent(event);
-  // }
-  // // if (e.key === "k") {
-  // //   e.preventDefault();
-  // //   replyNumber += 1;
-  // // }
-  // // if (e.key === "j") {
-  // //   e.preventDefault();
-  // //   replyNumber -= 1;
-  // // }
-  // // let result = document.querySelectorAll("[data-testid='msg-container']");
-  // // console.log(replyNumber);
-  // // result[result.length - replyNumber].dispatchEvent(doubleClick);
 });
 
 // Switching Modes
@@ -99,7 +79,7 @@ function switchToInsertMode() {
 
 function switchToNormalMode() {
   if (globals.currentMode === "n") {
-    switchToInsertMode();
+    globals.currentMode = "i";
     sendEscapeKeyEvent();
   }
   globals.currentMode = "n";
